@@ -71,7 +71,7 @@
     <body name="cube_a"
           pos="0.50 -0.08 0.44">
 
-      <freejoint/>
+      <freejoint name="cube_a_freejoint"/>
 
       <geom name="cube_a_geom"
             type="box"
@@ -85,7 +85,7 @@
     <body name="cube_b"
           pos="0.62 0.08 0.44">
 
-      <freejoint/>
+      <freejoint name="cube_b_freejoint"/>
 
       <geom name="cube_b_geom"
             type="box"
