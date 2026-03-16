@@ -6,7 +6,7 @@ import mujoco
 import mujoco.viewer
 
 MODEL_PATH = "franka_emika_panda/stack_scene.xml"
-DEFAULT_TRAJ = "datasets/traj_00001.npz"
+DEFAULT_TRAJ = "datasets/traj_00209.npz"
 
 HOME_CTRL = np.array([0, 0, 0, -1.57079, 0, 1.57079, -0.7853, 255], dtype=float)
 

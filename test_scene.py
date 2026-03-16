@@ -3,7 +3,8 @@ import numpy as np
 import mujoco
 import mujoco.viewer
 
-model = mujoco.MjModel.from_xml_path("franka_emika_panda/stack_scene.xml")
+# model = mujoco.MjModel.from_xml_path("franka_emika_panda/stack_scene.xml")
+model = mujoco.MjModel.from_xml_path("franka_emika_panda/mjx_single_cube.xml")
 data = mujoco.MjData(model)
 HOME_CTRL = np.array([0, 0, 0, -1.57079, 0, 1.57079, -0.7853, 255], dtype=float)
 data.ctrl[:] = HOME_CTRL

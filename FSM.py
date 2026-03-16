@@ -16,6 +16,7 @@ CUBE_A_BODY = "cube_a"
 CUBE_B_BODY = "cube_b"
 
 
+
 def get_id(model, objtype, name):
     idx = mujoco.mj_name2id(model, objtype, name)
     if idx == -1:
@@ -126,6 +127,8 @@ data = mujoco.MjData(model)
 site_id = get_id(model, mujoco.mjtObj.mjOBJ_SITE, SITE_NAME)
 cube_a_id = get_id(model, mujoco.mjtObj.mjOBJ_BODY, CUBE_A_BODY)
 cube_b_id = get_id(model, mujoco.mjtObj.mjOBJ_BODY, CUBE_B_BODY)
+home_site_pos = data.site_xpos[site_id].copy()
+safe_away_pos = np.array([0.45, 0.0, 0.55])
 
 data.ctrl[:] = HOME_CTRL
 mujoco.mj_forward(model, data)
@@ -221,7 +224,12 @@ with mujoco.viewer.launch_passive(model, data) as viewer:
             target_pos = place_pos + np.array([0.0, 0.0, retreat_z])
             grip_cmd = GRIP_OPEN
             if near(site_pos, target_pos, tol=0.03):
-                state = "done"
+                state = "return_home"
+
+        elif state == "return_home":
+            target_pos = safe_away_pos
+            grip_cmd = GRIP_OPEN
+            if near(site_pos, target_pos, tol=0.02):
                 print("Task complete.")
                 break
 

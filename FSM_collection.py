@@ -209,6 +209,8 @@ def run_fsm_episode(model, data, cube_a_init, cube_b_init, max_steps=2000, log_e
 
     home_q = HOME_CTRL[:ARM_DOF].copy()
     target_R = site_rotmat(data, site_id)
+    safe_away_pos = np.array([0.45, 0.0, 0.55])
+
 
     state = "move_above_a"
     state_counter = 0
@@ -291,8 +293,14 @@ def run_fsm_episode(model, data, cube_a_init, cube_b_init, max_steps=2000, log_e
             target_pos = place_pos + np.array([0.0, 0.0, retreat_z])
             grip_cmd = GRIP_OPEN
             if near(site_pos, target_pos, tol=0.03):
-                state = "done"
-                done = True
+                state = "return_home"
+
+        elif state == "return_home":
+            target_pos = safe_away_pos
+            grip_cmd = GRIP_OPEN
+            if near(site_pos, target_pos, tol=0.02):
+                print("Task complete.")
+                break
 
         obs = get_obs(model, data, site_id, cube_a_id, cube_b_id)
 
