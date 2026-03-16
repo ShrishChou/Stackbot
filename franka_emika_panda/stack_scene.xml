@@ -1,0 +1,100 @@
+<mujoco model="fr3_stack_scene">
+
+  <!-- Load the robot -->
+  <include file="panda.xml"/>
+
+  <!-- Visual setup -->
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6"
+               ambient="0.3 0.3 0.3"
+               specular="0 0 0"/>
+    <global azimuth="120"
+            elevation="-20"/>
+  </visual>
+
+  <!-- Materials and textures -->
+  <asset>
+    <texture type="skybox"
+             builtin="gradient"
+             rgb1="0.3 0.5 0.7"
+             rgb2="0 0 0"
+             width="512"
+             height="3072"/>
+
+    <texture name="groundplane"
+             type="2d"
+             builtin="checker"
+             rgb1="0.2 0.3 0.4"
+             rgb2="0.1 0.2 0.3"
+             width="300"
+             height="300"/>
+
+    <material name="groundplane"
+              texture="groundplane"
+              texuniform="true"
+              texrepeat="5 5"/>
+
+    <material name="table_mat"
+              rgba="0.7 0.6 0.5 1"/>
+
+    <material name="cube_red"
+              rgba="0.8 0.2 0.2 1"/>
+
+    <material name="cube_blue"
+              rgba="0.2 0.2 0.8 1"/>
+  </asset>
+
+  <worldbody>
+
+    <!-- Light -->
+    <light pos="0 0 2"
+           dir="0 0 -1"
+           directional="true"/>
+
+    <!-- Floor -->
+    <geom name="floor"
+          type="plane"
+          size="0 0 0.05"
+          material="groundplane"/>
+
+    <!-- Table -->
+    <body name="table"
+          pos="0.55 0 0.2">
+
+      <geom name="table_top"
+            type="box"
+            size="0.35 0.45 0.02"
+            material="table_mat"/>
+    </body>
+
+    <!-- Cube A (object to pick) -->
+    <body name="cube_a"
+          pos="0.50 -0.08 0.44">
+
+      <freejoint/>
+
+      <geom name="cube_a_geom"
+            type="box"
+            size="0.025 0.025 0.025"
+            mass="0.05"
+            material="cube_red"
+            friction="1 0.005 0.0001"/>
+    </body>
+
+    <!-- Cube B (base cube) -->
+    <body name="cube_b"
+          pos="0.62 0.08 0.44">
+
+      <freejoint/>
+
+      <geom name="cube_b_geom"
+            type="box"
+            size="0.025 0.025 0.025"
+            mass="0.05"
+            material="cube_blue"
+            friction="1 0.005 0.0001"/>
+    </body>
+
+  </worldbody>
+
+</mujoco>
