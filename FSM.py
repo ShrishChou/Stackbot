@@ -152,7 +152,7 @@ place_pos = None
 hover_z = 0.14
 grasp_z = 0.00
 lift_z = 0.18
-place_z = 0.105
+place_z = 0.03
 retreat_z = 0.18
 
 with mujoco.viewer.launch_passive(model, data) as viewer:

@@ -164,7 +164,7 @@ def evaluate(model, loader, device, loss_fn):
 @dataclass
 class Config:
     data_dir: str = "datasets"
-    out_dir: str = "bc_runs"
+    out_dir: str = "bc_runs2"
     batch_size: int = 512
     epochs: int = 100
     lr: float = 1e-3

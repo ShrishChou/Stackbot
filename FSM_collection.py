@@ -211,7 +211,6 @@ def run_fsm_episode(model, data, cube_a_init, cube_b_init, max_steps=2000, log_e
     target_R = site_rotmat(data, site_id)
     safe_away_pos = np.array([0.45, 0.0, 0.55])
 
-
     state = "move_above_a"
     state_counter = 0
     pick_pos = cube_a_init.copy()
