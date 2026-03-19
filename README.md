@@ -7,10 +7,10 @@ A self-contained imitation learning pipeline for robotic object stacking, simula
 ## Pipeline
 
 ```
-FSM.py                    →   FSM_collection.py            →   Imitation_learn.py         →   run_policy.py
-─────────────────────────     ──────────────────────────       ────────────────────────       ──────────────────
-Deterministic expert          Batch N episodes with             Train MLP on (obs → Δ)        Roll out trained
-controller with 6D pose IK    random object perturbations       via behavior cloning           policy in MuJoCo
+FSM.py                    →   FSM_collection.py            →   Imitation_learn.py         →   evals.py
+─────────────────────────     ──────────────────────────       ────────────────────────       ───────────────────────
+Deterministic expert          Batch N episodes with             Train MLP on (obs → Δ)        Generate heatmaps to
+controller with 6D pose IK    random object perturbations       via behavior cloning          evaluate policy in MuJoCo
 ```
 
 ---
